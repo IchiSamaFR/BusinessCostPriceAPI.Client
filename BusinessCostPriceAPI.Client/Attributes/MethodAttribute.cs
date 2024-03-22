@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessCostPriceAPI.Client.Service
+namespace BusinessCostPriceAPI.Client.Services
 {
     public class MethodAttribute : Attribute
     {

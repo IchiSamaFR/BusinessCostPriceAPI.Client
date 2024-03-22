@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BusinessCostPriceAPI.Client.Services;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -9,9 +10,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessCostPriceAPI.Client.Service
+namespace BusinessCostPriceAPI.Client.Services
 {
-    public partial class APIService
+    public partial class APIService : IAPIService
     {
         public static string Url = @"http://localhost:5281/";
         public static string JwtToken = "";
@@ -28,7 +29,7 @@ namespace BusinessCostPriceAPI.Client.Service
             Url = url.LastOrDefault() == '/' ? url : url + "/";
         }
 
-        private static async Task<T> GetReponse<T>(RestRequest request)
+        private async Task<T> GetReponse<T>(RestRequest request)
         {
             if (!string.IsNullOrEmpty(JwtToken))
             {
@@ -50,7 +51,7 @@ namespace BusinessCostPriceAPI.Client.Service
                 throw new ApiException("The HTTP status code of the response was not expected (" + response.StatusCode + ").", (int)response.StatusCode, response.Content, response.Headers?.ToList() ?? new List<HeaderParameter>(), null);
             }
         }
-        private static async Task GetReponse(RestRequest request)
+        private async Task GetReponse(RestRequest request)
         {
             if (!string.IsNullOrEmpty(JwtToken))
             {
@@ -68,7 +69,7 @@ namespace BusinessCostPriceAPI.Client.Service
                 throw new ApiException("The HTTP status code of the response was not expected (" + response.StatusCode + ").", (int)response.StatusCode, response.Content, response.Headers?.ToList() ?? new List<HeaderParameter>(), null);
             }
         }
-        private static string GetControllerRoute([CallerMemberName] string caller = "")
+        private string GetControllerRoute([CallerMemberName] string caller = "")
         {
             MethodBase method = MethodBase.GetCurrentMethod();
             Type declaringType = method.DeclaringType;
@@ -84,7 +85,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
             return "";
         }
-        private static Method GetMethod([CallerMemberName] string caller = "")
+        private Method GetMethod([CallerMemberName] string caller = "")
         {
             MethodBase method = MethodBase.GetCurrentMethod();
             Type declaringType = method.DeclaringType;

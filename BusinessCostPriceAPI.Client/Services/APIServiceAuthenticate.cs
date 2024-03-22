@@ -1,4 +1,5 @@
 ﻿using BusinessCostPriceAPI.Client.Models;
+using BusinessCostPriceAPI.Client.Services;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -6,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessCostPriceAPI.Client.Service
+namespace BusinessCostPriceAPI.Client.Services
 {
     public partial class APIService
     {
         [Method(Method.Post)]
         [ControllerRoute("Authenticate/Register")]
-        public static async Task<AuthenticateDTO> RegisterAsync(AuthenticateDTO body)
+        public async Task<AuthenticateDTO> RegisterAsync(AuthenticateDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
@@ -22,7 +23,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Post)]
         [ControllerRoute("Authenticate/Login")]
-        public static async Task<AuthenticateDTO> LoginAsync(AuthenticateDTO body)
+        public async Task<AuthenticateDTO> LoginAsync(AuthenticateDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
@@ -32,7 +33,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Post)]
         [ControllerRoute("Authenticate/UpdatePassword")]
-        public static async Task<AuthenticateDTO> UpdatePasswordAsync(AuthenticateDTO body)
+        public async Task<AuthenticateDTO> UpdatePasswordAsync(AuthenticateDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);

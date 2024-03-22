@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessCostPriceAPI.Client.Service
+namespace BusinessCostPriceAPI.Client.Services
 {
     public partial class APIService
     {
         [Method(Method.Get)]
         [ControllerRoute("Furnitures/GetFurnitures")]
-        public static async Task<List<FurnitureDTO>> GetFurnituresAsync(int? page)
+        public async Task<List<FurnitureDTO>> GetFurnituresAsync(int? page)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(page), page.ToString());
@@ -22,7 +22,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Get)]
         [ControllerRoute("Furnitures/GetFurniture")]
-        public static async Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
+        public async Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
@@ -32,7 +32,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Get)]
         [ControllerRoute("Furnitures/GetFurnitureStockInfos")]
-        public static async Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId)
+        public async Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
@@ -42,7 +42,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Post)]
         [ControllerRoute("Furnitures/AddFurniture")]
-        public static async Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body)
+        public async Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
@@ -52,7 +52,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Post)]
         [ControllerRoute("Furnitures/AddFurnitureStock")]
-        public static async Task<FurnitureStockInfoDTO> AddFurnitureStockAsync(FurnitureStockInfoDTO body)
+        public async Task<FurnitureStockInfoDTO> AddFurnitureStockAsync(FurnitureStockInfoDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
@@ -62,7 +62,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Put)]
         [ControllerRoute("Furnitures/UpdateFurniture")]
-        public static async Task<FurnitureDTO> UpdateFurnitureAsync(FurnitureDTO body)
+        public async Task<FurnitureDTO> UpdateFurnitureAsync(FurnitureDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
@@ -72,7 +72,7 @@ namespace BusinessCostPriceAPI.Client.Service
 
         [Method(Method.Delete)]
         [ControllerRoute("Furnitures/RemoveFurniture")]
-        public static async Task RemoveFurnitureAsync(int? furnitureId)
+        public async Task RemoveFurnitureAsync(int? furnitureId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
