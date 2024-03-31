@@ -37,6 +37,15 @@ namespace BusinessCostPriceAPI.Client.Services
 
             return await GetReponse< List<RecipeIngredientDTO>>(request);
         }
+        [Method(Method.Get)]
+        [ControllerRoute("Recipes/GetRecipeFromSubRecipe")]
+        public async Task<List<RecipeDTO>> GetRecipeFromSubRecipeAsync(int recipeId)
+        {
+            var request = new RestRequest(GetControllerRoute(), GetMethod());
+            request.AddParameter(nameof(recipeId), recipeId.ToString());
+
+            return await GetReponse<List<RecipeDTO>>(request);
+        }
 
 
         [Method(Method.Post)]

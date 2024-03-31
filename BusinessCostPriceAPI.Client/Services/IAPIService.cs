@@ -33,6 +33,7 @@ namespace BusinessCostPriceAPI.Client.Services
 
         Task<List<RecipeDTO>> GetRecipesAsync(int page);
         Task<RecipeDTO> GetRecipeAsync(int recipeId);
+        Task<List<RecipeDTO>> GetRecipeFromSubRecipeAsync(int recipeId);
         Task<List<RecipeIngredientDTO>> GetRecipeIngredientsAsync(int recipeId);
         Task<RecipeDTO> AddRecipeAsync(RecipeDTO body);
         Task<RecipeIngredientDTO> AddRecipeIngredientAsync(RecipeIngredientDTO body);

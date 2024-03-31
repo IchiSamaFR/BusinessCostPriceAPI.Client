@@ -113,6 +113,26 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         {
             return Task.FromResult(Recipes);
         }
+        public Task<List<RecipeDTO>> GetRecipeFromSubRecipeAsync(int recipeId)
+        {
+            var tmp = new List<RecipeDTO>();
+            return Task.FromResult(Recipes.Where(r => RecipeIsInSubRecipe(recipeId, r.Id)).ToList());
+        }
+        private bool RecipeIsInSubRecipe(int recipeSearchedId, int recipeId)
+        {
+            if (recipeSearchedId == recipeId)
+            {
+                return true;
+            }
+            foreach (var recipeIng in RecipeIngredients.Where(r => r.IngredientRecipeId == recipeId))
+            {
+                if (recipeIng.IngredientRecipeId > 0 && RecipeIsInSubRecipe(recipeId, recipeIng.IngredientRecipeId ?? 0))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public Task<AuthenticateDTO> LoginAsync(AuthenticateDTO body)
         {
