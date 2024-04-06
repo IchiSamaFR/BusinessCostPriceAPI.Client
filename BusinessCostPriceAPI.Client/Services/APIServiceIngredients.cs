@@ -39,7 +39,7 @@ namespace BusinessCostPriceAPI.Client.Services
         }
         [Method(Method.Get)]
         [ControllerRoute("Ingredients/GetIngredientStockDetails")]
-        public async Task<List<IngredientStockInfoDTO>> GetIngredientStockDetails(int ingredientId)
+        public async Task<List<IngredientStockInfoDTO>> GetIngredientStockDetailsAsync(int ingredientId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(ingredientId), ingredientId.ToString());

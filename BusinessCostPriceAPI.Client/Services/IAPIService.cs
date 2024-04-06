@@ -15,6 +15,7 @@ namespace BusinessCostPriceAPI.Client.Services
 
         Task<List<FurnitureDTO>> GetFurnituresAsync(int? page);
         Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId);
+        Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int? furnitureId);
         Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId);
         Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body);
         Task<FurnitureStockInfoDTO> AddFurnitureStockAsync(FurnitureStockInfoDTO body);
@@ -24,7 +25,7 @@ namespace BusinessCostPriceAPI.Client.Services
         Task<List<IngredientDTO>> GetIngredientsAsync(int page);
         Task<IngredientDTO> GetIngredientAsync(int ingredientId);
         Task<List<IngredientPriceInfoDTO>> GetIngredientPriceDetailsAsync(int ingredientId);
-        Task<List<IngredientStockInfoDTO>> GetIngredientStockDetails(int ingredientId);
+        Task<List<IngredientStockInfoDTO>> GetIngredientStockDetailsAsync(int ingredientId);
         Task<IngredientDTO> AddIngredientAsync(IngredientDTO body);
         Task<IngredientPriceInfoDTO> AddIngredientPriceAsync(IngredientPriceInfoDTO body);
         Task<IngredientStockInfoDTO> AddIngredientStockAsync(IngredientStockInfoDTO body);

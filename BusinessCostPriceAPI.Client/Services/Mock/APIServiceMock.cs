@@ -13,6 +13,7 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         public List<IngredientPriceInfoDTO> IngredientPriceInfos { get; private set; }
         public List<IngredientStockInfoDTO> IngredientStockInfos { get; private set; }
         public List<FurnitureDTO> Furnitures { get; private set; }
+        public List<FurniturePriceInfoDTO> FurniturePriceInfos { get; private set; }
         public List<FurnitureStockInfoDTO> FurnitureStockInfos { get; private set; }
         public List<RecipeDTO> Recipes { get; private set; }
         public List<RecipeIngredientDTO> RecipeIngredients { get; private set; }
@@ -20,6 +21,7 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         public APIServiceMock()
         {
             PopulateFurnitures();
+            PopulateFurniturePrices();
             PopulateFurnitureStocks();
 
             PopulateIngredients();
@@ -71,32 +73,42 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         }
 
 
-        public Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
-        {
-            return Task.FromResult(Furnitures.FirstOrDefault(i => i.Id == furnitureId));
-        }
         public Task<List<FurnitureDTO>> GetFurnituresAsync(int? page)
         {
-            return Task.FromResult(Furnitures);
+            return Task.FromResult(Furnitures.Select(i => GetFurnitureAsync(i.Id).Result).ToList());
+        }
+        public Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
+        {
+            var tmp = Furnitures.FirstOrDefault(i => i.Id == furnitureId);
+            tmp.UnitPrice = GetFurniturePriceInfosAsync(furnitureId).Result.LastOrDefault().UnitPrice;
+            tmp.StockQuantity = GetFurnitureStockInfosAsync(furnitureId).Result.LastOrDefault().StockQuantity;
+            return Task.FromResult(tmp);
+        }
+        public Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int? furnitureId)
+        {
+            return Task.FromResult(FurniturePriceInfos.Where(r => r.FurnitureId == furnitureId).ToList());
         }
         public Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId)
         {
             return Task.FromResult(FurnitureStockInfos.Where(r => r.FurnitureId == furnitureId).ToList());
         }
 
+        public Task<List<IngredientDTO>> GetIngredientsAsync(int page)
+        {
+            return Task.FromResult(Ingredients.Select(i => GetIngredientAsync(i.Id).Result).ToList());
+        }
         public Task<IngredientDTO> GetIngredientAsync(int ingredientId)
         {
-            return Task.FromResult(Ingredients.FirstOrDefault(i => i.Id == ingredientId));
+            var tmp = Ingredients.FirstOrDefault(i => i.Id == ingredientId);
+            tmp.UnitPrice = GetIngredientPriceDetailsAsync(ingredientId).Result.LastOrDefault().UnitPrice;
+            tmp.StockQuantity = GetIngredientStockDetailsAsync(ingredientId).Result.LastOrDefault().StockQuantity;
+            return Task.FromResult(tmp);
         }
         public Task<List<IngredientPriceInfoDTO>> GetIngredientPriceDetailsAsync(int ingredientId)
         {
             return Task.FromResult(IngredientPriceInfos.Where(r => r.IngredientId == ingredientId).ToList());
         }
-        public Task<List<IngredientDTO>> GetIngredientsAsync(int page)
-        {
-            return Task.FromResult(Ingredients);
-        }
-        public Task<List<IngredientStockInfoDTO>> GetIngredientStockDetails(int ingredientId)
+        public Task<List<IngredientStockInfoDTO>> GetIngredientStockDetailsAsync(int ingredientId)
         {
             return Task.FromResult(IngredientStockInfos.Where(r => r.IngredientId == ingredientId).ToList());
         }
@@ -275,15 +287,67 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
                 {
                     Id = 3,
                     Name = "Emballage",
-                    UnitPrice = 0.08d,
                     Unit = Unit.Piece
                 },
                 new FurnitureDTO
                 {
                     Id = 4,
                     Name = "Sac papier",
-                    UnitPrice = 0.05d,
                     Unit = Unit.Piece
+                },
+                new FurnitureDTO
+                {
+                    Id = 5,
+                    Name = "Cagette en bois",
+                    Unit = Unit.Piece
+                }
+            };
+        }
+        private void PopulateFurniturePrices()
+        {
+            FurniturePriceInfos = new List<FurniturePriceInfoDTO>
+            {
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 3,
+                    Date = DateTime.Parse("15/01/2024"),
+                    UnitPrice = 0.08d
+                },
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 3,
+                    Date = DateTime.Parse("15/03/2024"),
+                    UnitPrice = 0.11d
+                },
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 4,
+                    Date = DateTime.Parse("20/01/2024"),
+                    UnitPrice = 0.09d
+                },
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 4,
+                    Date = DateTime.Parse("20/02/2024"),
+                    UnitPrice = 0.14d
+                },
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 4,
+                    Date = DateTime.Parse("20/03/2024"),
+                    UnitPrice = 0.13d
+                },
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 5,
+                    Date = DateTime.Parse("20/01/2024"),
+                    UnitPrice = 2.2d
+                },
+                new FurniturePriceInfoDTO()
+                {
+                    FurnitureId = 5,
+                    Date = DateTime.Parse("20/03/2024"),
+                    UnitPrice = 3.1d
                 }
             };
         }
@@ -302,6 +366,12 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
                     FurnitureId = 4,
                     Date = DateTime.Parse("20/01/2024"),
                     StockQuantity = 52d
+                },
+                new FurnitureStockInfoDTO()
+                {
+                    FurnitureId = 5,
+                    Date = DateTime.Parse("20/01/2024"),
+                    StockQuantity = 12d
                 }
             };
         }

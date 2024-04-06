@@ -53,6 +53,18 @@ namespace BusinessCostPriceAPI.Client.Models
 
     }
 
+    public partial class FurniturePriceInfoDTO
+    {
+        [JsonProperty("furnitureId", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public int FurnitureId { get; set; }
+
+        [JsonProperty("date", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public System.DateTimeOffset Date { get; set; }
+
+        [JsonProperty("unitPrice", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public double UnitPrice { get; set; }
+    }
+
     public partial class FurnitureStockInfoDTO
     {
         [JsonProperty("furnitureId", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]

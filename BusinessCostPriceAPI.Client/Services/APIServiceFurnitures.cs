@@ -31,6 +31,16 @@ namespace BusinessCostPriceAPI.Client.Services
         }
 
         [Method(Method.Get)]
+        [ControllerRoute("Furnitures/GetFurniturePriceInfos")]
+        public async Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int? furnitureId)
+        {
+            var request = new RestRequest(GetControllerRoute(), GetMethod());
+            request.AddParameter(nameof(furnitureId), furnitureId.ToString());
+
+            return await GetReponse<List<FurniturePriceInfoDTO>>(request);
+        }
+
+        [Method(Method.Get)]
         [ControllerRoute("Furnitures/GetFurnitureStockInfos")]
         public async Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId)
         {
@@ -48,6 +58,16 @@ namespace BusinessCostPriceAPI.Client.Services
             request.AddBody(body);
 
             return await GetReponse<FurnitureDTO>(request);
+        }
+
+        [Method(Method.Post)]
+        [ControllerRoute("Furnitures/AddFurniturePrice")]
+        public async Task<FurniturePriceInfoDTO> AddFurnitureStockAsync(FurniturePriceInfoDTO body)
+        {
+            var request = new RestRequest(GetControllerRoute(), GetMethod());
+            request.AddBody(body);
+
+            return await GetReponse<FurniturePriceInfoDTO>(request);
         }
 
         [Method(Method.Post)]
