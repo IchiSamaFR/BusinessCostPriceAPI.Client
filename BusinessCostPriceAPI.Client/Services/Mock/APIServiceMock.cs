@@ -80,8 +80,8 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         public Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
         {
             var tmp = Furnitures.FirstOrDefault(i => i.Id == furnitureId);
-            tmp.UnitPrice = GetFurniturePriceInfosAsync(furnitureId).Result.LastOrDefault().UnitPrice;
-            tmp.StockQuantity = GetFurnitureStockInfosAsync(furnitureId).Result.LastOrDefault().StockQuantity;
+            tmp.UnitPrice = GetFurniturePriceInfosAsync(furnitureId).Result.LastOrDefault()?.UnitPrice ?? 0;
+            tmp.StockQuantity = GetFurnitureStockInfosAsync(furnitureId).Result.LastOrDefault()?.StockQuantity ?? 0;
             return Task.FromResult(tmp);
         }
         public Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int? furnitureId)
@@ -100,8 +100,8 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         public Task<IngredientDTO> GetIngredientAsync(int ingredientId)
         {
             var tmp = Ingredients.FirstOrDefault(i => i.Id == ingredientId);
-            tmp.UnitPrice = GetIngredientPriceDetailsAsync(ingredientId).Result.LastOrDefault().UnitPrice;
-            tmp.StockQuantity = GetIngredientStockDetailsAsync(ingredientId).Result.LastOrDefault().StockQuantity;
+            tmp.UnitPrice = GetIngredientPriceDetailsAsync(ingredientId).Result.LastOrDefault()?.UnitPrice ?? 0;
+            tmp.StockQuantity = GetIngredientStockDetailsAsync(ingredientId).Result.LastOrDefault()?.StockQuantity ?? 0;
             return Task.FromResult(tmp);
         }
         public Task<List<IngredientPriceInfoDTO>> GetIngredientPriceDetailsAsync(int ingredientId)
