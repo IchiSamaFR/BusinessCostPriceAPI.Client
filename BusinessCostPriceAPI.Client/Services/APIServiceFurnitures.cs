@@ -62,7 +62,7 @@ namespace BusinessCostPriceAPI.Client.Services
 
         [Method(Method.Post)]
         [ControllerRoute("Furnitures/AddFurniturePrice")]
-        public async Task<FurniturePriceInfoDTO> AddFurnitureStockAsync(FurniturePriceInfoDTO body)
+        public async Task<FurniturePriceInfoDTO> AddFurniturePriceAsync(FurniturePriceInfoDTO body)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);

@@ -19,6 +19,7 @@ namespace BusinessCostPriceAPI.Client.Services
         Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId);
         Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body);
         Task<FurnitureStockInfoDTO> AddFurnitureStockAsync(FurnitureStockInfoDTO body);
+        Task<FurniturePriceInfoDTO> AddFurniturePriceAsync(FurniturePriceInfoDTO body);
         Task<FurnitureDTO> UpdateFurnitureAsync(FurnitureDTO body);
         Task RemoveFurnitureAsync(int? furnitureId);
 
