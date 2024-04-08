@@ -17,7 +17,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(page), page.ToString());
 
-            return await GetReponse<List<RecipeDTO>>(request);
+            return await GetResponse<List<RecipeDTO>>(request);
         }
         [Method(Method.Get)]
         [ControllerRoute("Recipes/GetRecipe")]
@@ -26,7 +26,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(recipeId), recipeId.ToString());
 
-            return await GetReponse<RecipeDTO>(request);
+            return await GetResponse<RecipeDTO>(request);
         }
         [Method(Method.Get)]
         [ControllerRoute("Recipes/GetRecipeIngredients")]
@@ -35,7 +35,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(recipeId), recipeId.ToString());
 
-            return await GetReponse< List<RecipeIngredientDTO>>(request);
+            return await GetResponse< List<RecipeIngredientDTO>>(request);
         }
         [Method(Method.Get)]
         [ControllerRoute("Recipes/GetRecipeFromSubRecipe")]
@@ -44,7 +44,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(recipeId), recipeId.ToString());
 
-            return await GetReponse<List<RecipeDTO>>(request);
+            return await GetResponse<List<RecipeDTO>>(request);
         }
 
 
@@ -55,7 +55,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<RecipeDTO>(request);
+            return await GetResponse<RecipeDTO>(request);
         }
         [Method(Method.Post)]
         [ControllerRoute("Recipes/AddRecipeIngredient")]
@@ -64,7 +64,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body.ToSend());
 
-            return await GetReponse<RecipeIngredientDTO>(request);
+            return await GetResponse<RecipeIngredientDTO>(request);
         }
 
         [Method(Method.Put)]
@@ -74,7 +74,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<RecipeDTO>(request);
+            return await GetResponse<RecipeDTO>(request);
         }
         [Method(Method.Put)]
         [ControllerRoute("Recipes/UpdateRecipeIngredient")]
@@ -83,7 +83,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body.ToSend());
 
-            return await GetReponse<RecipeIngredientDTO>(request);
+            return await GetResponse<RecipeIngredientDTO>(request);
         }
 
 
@@ -94,7 +94,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(recipeId), recipeId.ToString());
 
-            await GetReponse(request);
+            await GetResponse(request);
         }
         [Method(Method.Delete)]
         [ControllerRoute("Recipes/RemoveRecipeIngredient")]
@@ -103,7 +103,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(recipeIngredientId), recipeIngredientId.ToString());
 
-            await GetReponse(request);
+            await GetResponse(request);
         }
     }
 }

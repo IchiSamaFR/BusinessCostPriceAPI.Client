@@ -29,7 +29,7 @@ namespace BusinessCostPriceAPI.Client.Services
             Url = url.LastOrDefault() == '/' ? url : url + "/";
         }
 
-        private async Task<T> GetReponse<T>(RestRequest request)
+        private async Task<T> GetResponse<T>(RestRequest request)
         {
             if (!string.IsNullOrEmpty(JwtToken))
             {
@@ -51,7 +51,7 @@ namespace BusinessCostPriceAPI.Client.Services
                 throw new ApiException("The HTTP status code of the response was not expected (" + response.StatusCode + ").", (int)response.StatusCode, response.Content, response.Headers?.ToList() ?? new List<HeaderParameter>(), null);
             }
         }
-        private async Task GetReponse(RestRequest request)
+        private async Task GetResponse(RestRequest request)
         {
             if (!string.IsNullOrEmpty(JwtToken))
             {

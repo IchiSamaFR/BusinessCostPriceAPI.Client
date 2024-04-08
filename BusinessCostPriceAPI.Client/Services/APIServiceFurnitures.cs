@@ -17,7 +17,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(page), page.ToString());
 
-            return await GetReponse<List<FurnitureDTO>>(request);
+            return await GetResponse<List<FurnitureDTO>>(request);
         }
 
         [Method(Method.Get)]
@@ -27,7 +27,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
 
-            return await GetReponse<FurnitureDTO>(request);
+            return await GetResponse<FurnitureDTO>(request);
         }
 
         [Method(Method.Get)]
@@ -37,7 +37,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
 
-            return await GetReponse<List<FurniturePriceInfoDTO>>(request);
+            return await GetResponse<List<FurniturePriceInfoDTO>>(request);
         }
 
         [Method(Method.Get)]
@@ -47,7 +47,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
 
-            return await GetReponse<List<FurnitureStockInfoDTO>>(request);
+            return await GetResponse<List<FurnitureStockInfoDTO>>(request);
         }
 
         [Method(Method.Post)]
@@ -57,7 +57,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<FurnitureDTO>(request);
+            return await GetResponse<FurnitureDTO>(request);
         }
 
         [Method(Method.Post)]
@@ -67,7 +67,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<FurniturePriceInfoDTO>(request);
+            return await GetResponse<FurniturePriceInfoDTO>(request);
         }
 
         [Method(Method.Post)]
@@ -77,7 +77,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<FurnitureStockInfoDTO>(request);
+            return await GetResponse<FurnitureStockInfoDTO>(request);
         }
 
         [Method(Method.Put)]
@@ -87,7 +87,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<FurnitureDTO>(request);
+            return await GetResponse<FurnitureDTO>(request);
         }
 
         [Method(Method.Delete)]
@@ -97,7 +97,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
 
-            await GetReponse(request);
+            await GetResponse(request);
         }
     }
 }

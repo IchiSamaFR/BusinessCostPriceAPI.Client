@@ -18,7 +18,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<AuthenticateDTO>(request);
+            return await GetResponse<AuthenticateDTO>(request);
         }
 
         [Method(Method.Post)]
@@ -28,7 +28,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<AuthenticateDTO>(request);
+            return await GetResponse<AuthenticateDTO>(request);
         }
 
         [Method(Method.Post)]
@@ -38,7 +38,7 @@ namespace BusinessCostPriceAPI.Client.Services
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddBody(body);
 
-            return await GetReponse<AuthenticateDTO>(request);
+            return await GetResponse<AuthenticateDTO>(request);
         }
     }
 }
