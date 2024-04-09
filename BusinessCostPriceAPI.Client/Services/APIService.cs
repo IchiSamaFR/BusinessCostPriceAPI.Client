@@ -14,9 +14,9 @@ namespace BusinessCostPriceAPI.Client.Services
 {
     public partial class APIService : IAPIService
     {
-        public static string Url = @"http://localhost:5281/";
-        public static string JwtToken = "";
-        public static bool IsLogged
+        public string Url = @"http://localhost:5281/";
+        public string JwtToken { get; set; }
+        public bool IsLogged
         {
             get
             {
@@ -24,7 +24,14 @@ namespace BusinessCostPriceAPI.Client.Services
             }
         }
 
-        public static void SetUrl(string url)
+        public APIService(string url = "")
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                SetUrl(url);
+            }
+        }
+        public void SetUrl(string url)
         {
             Url = url.LastOrDefault() == '/' ? url : url + "/";
         }

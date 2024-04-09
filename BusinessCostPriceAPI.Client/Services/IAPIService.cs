@@ -9,6 +9,8 @@ namespace BusinessCostPriceAPI.Client.Services
 {
     public interface IAPIService
     {
+        string JwtToken { get; set; }
+        void SetUrl(string url);
         Task<AuthenticateDTO> RegisterAsync(AuthenticateDTO body);
         Task<AuthenticateDTO> LoginAsync(AuthenticateDTO body);
         Task<AuthenticateDTO> UpdatePasswordAsync(AuthenticateDTO body);

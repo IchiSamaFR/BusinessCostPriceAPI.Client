@@ -9,6 +9,8 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
 {
     public class APIServiceMock : IAPIService
     {
+        public string JwtToken { get; set; }
+
         public List<IngredientDTO> Ingredients { get; private set; }
         public List<IngredientPriceInfoDTO> IngredientPriceInfos { get; private set; }
         public List<IngredientStockInfoDTO> IngredientStockInfos { get; private set; }
@@ -30,6 +32,10 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
 
             PopulateRecipes();
             PopulateRecipeIngredients();
+        }
+        public void SetUrl(string url)
+        {
+
         }
 
         public async Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body)
