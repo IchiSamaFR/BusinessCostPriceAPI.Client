@@ -147,15 +147,15 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         public Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
         {
             var tmp = Furnitures.FirstOrDefault(i => i.Id == furnitureId);
-            tmp.UnitPrice = GetFurniturePriceInfosAsync(furnitureId).Result.LastOrDefault()?.UnitPrice ?? 0;
-            tmp.StockQuantity = GetFurnitureStockInfosAsync(furnitureId).Result.LastOrDefault()?.StockQuantity ?? 0;
+            tmp.UnitPrice = GetFurniturePriceDetailsAsync(furnitureId).Result.LastOrDefault()?.UnitPrice ?? 0;
+            tmp.StockQuantity = GetFurnitureStockDetailsAsync(furnitureId).Result.LastOrDefault()?.StockQuantity ?? 0;
             return Task.FromResult(tmp);
         }
-        public Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int? furnitureId)
+        public Task<List<FurniturePriceInfoDTO>> GetFurniturePriceDetailsAsync(int? furnitureId)
         {
             return Task.FromResult(FurniturePriceInfos.Where(r => r.FurnitureId == furnitureId).OrderBy(r => r.Date).ToList());
         }
-        public Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId)
+        public Task<List<FurnitureStockInfoDTO>> GetFurnitureStockDetailsAsync(int? furnitureId)
         {
             return Task.FromResult(FurnitureStockInfos.Where(r => r.FurnitureId == furnitureId).OrderBy(r => r.Date).ToList());
         }

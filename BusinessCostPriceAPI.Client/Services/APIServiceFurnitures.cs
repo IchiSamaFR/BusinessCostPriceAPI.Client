@@ -32,7 +32,7 @@ namespace BusinessCostPriceAPI.Client.Services
 
         [Method(Method.Get)]
         [ControllerRoute("Furnitures/GetFurniturePriceInfos")]
-        public async Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int? furnitureId)
+        public async Task<List<FurniturePriceInfoDTO>> GetFurniturePriceDetailsAsync(int? furnitureId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
@@ -42,7 +42,7 @@ namespace BusinessCostPriceAPI.Client.Services
 
         [Method(Method.Get)]
         [ControllerRoute("Furnitures/GetFurnitureStockInfos")]
-        public async Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int? furnitureId)
+        public async Task<List<FurnitureStockInfoDTO>> GetFurnitureStockDetailsAsync(int? furnitureId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(furnitureId), furnitureId.ToString());
