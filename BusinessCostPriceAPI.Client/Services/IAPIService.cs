@@ -17,8 +17,10 @@ namespace BusinessCostPriceAPI.Client.Services
 
         Task<List<FurnitureDTO>> GetFurnituresAsync(int? page);
         Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId);
-        Task<List<FurniturePriceInfoDTO>> GetFurniturePriceDetailsAsync(int? furnitureId);
-        Task<List<FurnitureStockInfoDTO>> GetFurnitureStockDetailsAsync(int? furnitureId);
+        Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int furnitureId);
+        Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosByAsync(int furnitureId, Period period, int limit);
+        Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int furnitureId);
+        Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosByAsync(int furnitureId, Period period, int limit);
         Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body);
         Task<FurnitureStockInfoDTO> AddFurnitureStockAsync(FurnitureStockInfoDTO body);
         Task<FurniturePriceInfoDTO> AddFurniturePriceAsync(FurniturePriceInfoDTO body);
@@ -27,8 +29,10 @@ namespace BusinessCostPriceAPI.Client.Services
 
         Task<List<IngredientDTO>> GetIngredientsAsync(int page);
         Task<IngredientDTO> GetIngredientAsync(int ingredientId);
-        Task<List<IngredientPriceInfoDTO>> GetIngredientPriceDetailsAsync(int ingredientId);
-        Task<List<IngredientStockInfoDTO>> GetIngredientStockDetailsAsync(int ingredientId);
+        Task<List<IngredientPriceInfoDTO>> GetIngredientPriceInfosAsync(int ingredientId);
+        Task<List<IngredientPriceInfoDTO>> GetIngredientPriceInfosByAsync(int ingredientId, Period period, int limit);
+        Task<List<IngredientStockInfoDTO>> GetIngredientStockInfosAsync(int ingredientId);
+        Task<List<IngredientStockInfoDTO>> GetIngredientStockInfosByAsync(int ingredientId, Period period, int limit);
         Task<IngredientDTO> AddIngredientAsync(IngredientDTO body);
         Task<IngredientPriceInfoDTO> AddIngredientPriceAsync(IngredientPriceInfoDTO body);
         Task<IngredientStockInfoDTO> AddIngredientStockAsync(IngredientStockInfoDTO body);

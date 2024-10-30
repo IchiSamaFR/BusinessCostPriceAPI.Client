@@ -29,8 +29,8 @@ namespace BusinessCostPriceAPI.Client.Services
             return await GetResponse<IngredientDTO>(request);
         }
         [Method(Method.Get)]
-        [ControllerRoute("Ingredients/GetIngredientPriceDetails")]
-        public async Task<List<IngredientPriceInfoDTO>> GetIngredientPriceDetailsAsync(int ingredientId)
+        [ControllerRoute("Ingredients/GetIngredientPriceInfos")]
+        public async Task<List<IngredientPriceInfoDTO>> GetIngredientPriceInfosAsync(int ingredientId)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(ingredientId), ingredientId.ToString());
@@ -38,11 +38,33 @@ namespace BusinessCostPriceAPI.Client.Services
             return await GetResponse<List<IngredientPriceInfoDTO>>(request);
         }
         [Method(Method.Get)]
-        [ControllerRoute("Ingredients/GetIngredientStockDetails")]
-        public async Task<List<IngredientStockInfoDTO>> GetIngredientStockDetailsAsync(int ingredientId)
+        [ControllerRoute("Ingredients/GetIngredientPriceInfosBy")]
+        public async Task<List<IngredientPriceInfoDTO>> GetIngredientPriceInfosByAsync(int ingredientId, Period period, int limit)
         {
             var request = new RestRequest(GetControllerRoute(), GetMethod());
             request.AddParameter(nameof(ingredientId), ingredientId.ToString());
+            request.AddParameter(nameof(period), period.ToString());
+            request.AddParameter(nameof(limit), limit.ToString());
+
+            return await GetResponse<List<IngredientPriceInfoDTO>>(request);
+        }
+        [Method(Method.Get)]
+        [ControllerRoute("Ingredients/GetIngredientStockInfos")]
+        public async Task<List<IngredientStockInfoDTO>> GetIngredientStockInfosAsync(int ingredientId)
+        {
+            var request = new RestRequest(GetControllerRoute(), GetMethod());
+            request.AddParameter(nameof(ingredientId), ingredientId.ToString());
+
+            return await GetResponse<List<IngredientStockInfoDTO>>(request);
+        }
+        [Method(Method.Get)]
+        [ControllerRoute("Ingredients/GetIngredientStockInfosBy")]
+        public async Task<List<IngredientStockInfoDTO>> GetIngredientStockInfosByAsync(int ingredientId, Period period, int limit)
+        {
+            var request = new RestRequest(GetControllerRoute(), GetMethod());
+            request.AddParameter(nameof(ingredientId), ingredientId.ToString());
+            request.AddParameter(nameof(period), period.ToString());
+            request.AddParameter(nameof(limit), limit.ToString());
 
             return await GetResponse<List<IngredientStockInfoDTO>>(request);
         }

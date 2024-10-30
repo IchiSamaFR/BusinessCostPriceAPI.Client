@@ -220,4 +220,17 @@ namespace BusinessCostPriceAPI.Client.Models
         [System.Runtime.Serialization.EnumMember(Value = @"dozen")]
         Dozen = 3,
     }
+
+    public enum Period
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        Day = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"month")]
+        Month = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"year")]
+        Year = 2
+    }
 }
