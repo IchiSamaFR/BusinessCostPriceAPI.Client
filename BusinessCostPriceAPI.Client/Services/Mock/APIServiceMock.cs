@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessCostPriceAPI.Client.Services.Mock
 {
-    public class APIServiceMock : IAPIService
+    public partial class APIServiceMock : IAPIService
     {
         public string JwtToken { get; set; }
 
@@ -37,294 +37,6 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
         {
 
         }
-
-        public async Task<FurnitureDTO> AddFurnitureAsync(FurnitureDTO body)
-        {
-            body.Id = Furnitures.LastOrDefault()?.Id + 1 ?? 1;
-            Furnitures.Add(body);
-            await AddFurniturePriceAsync(new FurniturePriceInfoDTO()
-            {
-                Date = DateTime.Now.Date,
-                UnitPrice = body.UnitPrice,
-                FurnitureId = body.Id
-            });
-            await AddFurnitureStockAsync(new FurnitureStockInfoDTO()
-            {
-                Date = DateTime.Now.Date,
-                StockQuantity = body.StockQuantity,
-                FurnitureId = body.Id
-            });
-            return body;
-        }
-        public Task<FurniturePriceInfoDTO> AddFurniturePriceAsync(FurniturePriceInfoDTO body)
-        {
-            var sel = FurniturePriceInfos.Find((f) => f.Date.Date == DateTime.Now.Date);
-
-            if (sel == null)
-            {
-                body.Date = DateTime.Now.Date;
-                FurniturePriceInfos.Add(body);
-                return Task.FromResult(body);
-            }
-            sel.UnitPrice = body.UnitPrice;
-            return Task.FromResult(sel);
-        }
-        public Task<FurnitureStockInfoDTO> AddFurnitureStockAsync(FurnitureStockInfoDTO body)
-        {
-            var sel = FurnitureStockInfos.Find((f) => f.Date.Date == DateTime.Now.Date);
-
-            if (sel == null)
-            {
-                body.Date = DateTime.Now.Date;
-                FurnitureStockInfos.Add(body);
-                return Task.FromResult(body);
-            }
-            sel.StockQuantity = body.StockQuantity;
-            return Task.FromResult(sel);
-        }
-        public async Task<IngredientDTO> AddIngredientAsync(IngredientDTO body)
-        {
-            body.Id = Ingredients.LastOrDefault()?.Id + 1 ?? 1;
-            Ingredients.Add(body);
-            await AddIngredientPriceAsync(new IngredientPriceInfoDTO()
-            {
-                Date = DateTime.Now.Date,
-                UnitPrice = body.UnitPrice,
-                IngredientId = body.Id
-            });
-            await AddIngredientStockAsync(new IngredientStockInfoDTO()
-            {
-                Date = DateTime.Now.Date,
-                StockQuantity = body.StockQuantity,
-                IngredientId = body.Id
-            });
-            return body;
-        }
-        public Task<IngredientPriceInfoDTO> AddIngredientPriceAsync(IngredientPriceInfoDTO body)
-        {
-            var sel = IngredientPriceInfos.Find((f) => f.Date.Date == DateTime.Now.Date);
-
-            if (sel == null)
-            {
-                body.Date = DateTime.Now.Date;
-                IngredientPriceInfos.Add(body);
-                return Task.FromResult(body);
-            }
-            sel.UnitPrice = body.UnitPrice;
-            return Task.FromResult(sel);
-        }
-        public Task<IngredientStockInfoDTO> AddIngredientStockAsync(IngredientStockInfoDTO body)
-        {
-            var sel = IngredientStockInfos.Find((f) => f.Date.Date == DateTime.Now.Date);
-
-            if (sel != null)
-            {
-                body.Date = DateTime.Now.Date;
-                IngredientStockInfos.Add(body);
-                return Task.FromResult(body);
-            }
-            sel.StockQuantity = body.StockQuantity;
-            return Task.FromResult(sel);
-        }
-
-        public Task<RecipeDTO> AddRecipeAsync(RecipeDTO body)
-        {
-            body.Id = Recipes.LastOrDefault()?.Id + 1 ?? 1;
-            Recipes.Add(body);
-            return Task.FromResult(body);
-        }
-        public Task<RecipeIngredientDTO> AddRecipeIngredientAsync(RecipeIngredientDTO body)
-        {
-            RecipeIngredients.Add(body);
-            return Task.FromResult(body);
-        }
-
-
-        public Task<List<FurnitureDTO>> GetFurnituresAsync(int? page)
-        {
-            return Task.FromResult(Furnitures.Select(i => GetFurnitureAsync(i.Id).Result).ToList());
-        }
-        public Task<FurnitureDTO> GetFurnitureAsync(int? furnitureId)
-        {
-            var tmp = Furnitures.FirstOrDefault(i => i.Id == furnitureId);
-            tmp.UnitPrice = GetFurniturePriceInfosAsync(furnitureId ?? 0).Result.LastOrDefault()?.UnitPrice ?? 0;
-            tmp.StockQuantity = GetFurnitureStockInfosAsync(furnitureId ?? 0).Result.LastOrDefault()?.StockQuantity ?? 0;
-            return Task.FromResult(tmp);
-        }
-        public Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosAsync(int furnitureId)
-        {
-            return Task.FromResult(FurniturePriceInfos.Where(r => r.FurnitureId == furnitureId).OrderBy(r => r.Date).ToList());
-        }
-        public Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosAsync(int furnitureId)
-        {
-            return Task.FromResult(FurnitureStockInfos.Where(r => r.FurnitureId == furnitureId).OrderBy(r => r.Date).ToList());
-        }
-
-        public Task<List<IngredientDTO>> GetIngredientsAsync(int page)
-        {
-            return Task.FromResult(Ingredients.Select(i => GetIngredientAsync(i.Id).Result).ToList());
-        }
-        public Task<IngredientDTO> GetIngredientAsync(int ingredientId)
-        {
-            var tmp = Ingredients.FirstOrDefault(i => i.Id == ingredientId);
-            tmp.UnitPrice = GetIngredientPriceInfosAsync(ingredientId).Result.LastOrDefault()?.UnitPrice ?? 0;
-            tmp.StockQuantity = GetIngredientStockInfosAsync(ingredientId).Result.LastOrDefault()?.StockQuantity ?? 0;
-            return Task.FromResult(tmp);
-        }
-        public Task<List<IngredientPriceInfoDTO>> GetIngredientPriceInfosAsync(int ingredientId)
-        {
-            return Task.FromResult(IngredientPriceInfos.Where(r => r.IngredientId == ingredientId).OrderBy(r => r.Date).ToList());
-        }
-        public Task<List<IngredientStockInfoDTO>> GetIngredientStockInfosAsync(int ingredientId)
-        {
-            return Task.FromResult(IngredientStockInfos.Where(r => r.IngredientId == ingredientId).OrderBy(r => r.Date).ToList());
-        }
-
-        public Task<RecipeDTO> GetRecipeAsync(int recipeId)
-        {
-            return Task.FromResult(Recipes.FirstOrDefault(r => r.Id == recipeId));
-        }
-        public Task<List<RecipeIngredientDTO>> GetRecipeIngredientsAsync(int recipeId)
-        {
-            return Task.FromResult(RecipeIngredients.Where(r => r.RecipeId == recipeId).ToList());
-        }
-        public Task<List<RecipeDTO>> GetRecipesAsync(int page)
-        {
-            return Task.FromResult(Recipes);
-        }
-        public Task<List<RecipeDTO>> GetRecipeFromSubRecipeAsync(int recipeId)
-        {
-            var tmp = new List<RecipeDTO>();
-            return Task.FromResult(Recipes.Where(r => RecipeIsInSubRecipe(recipeId, r.Id)).ToList());
-        }
-        private bool RecipeIsInSubRecipe(int recipeSearchedId, int recipeId)
-        {
-            if (recipeSearchedId == recipeId)
-            {
-                return true;
-            }
-            foreach (var recipeIng in RecipeIngredients.Where(r => r.IngredientRecipeId == recipeId))
-            {
-                if (recipeIng.IngredientRecipeId > 0 && RecipeIsInSubRecipe(recipeId, recipeIng.IngredientRecipeId ?? 0))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Task<AuthenticateDTO> LoginAsync(AuthenticateDTO body)
-        {
-            body.Password = string.Empty;
-            body.Token = Guid.NewGuid().ToString();
-            return Task.FromResult(body);
-        }
-        public Task<AuthenticateDTO> RegisterAsync(AuthenticateDTO body)
-        {
-            body.Password = string.Empty;
-            body.Token = new Guid().ToString();
-            return Task.FromResult(body);
-        }
-
-        public Task RemoveFurnitureAsync(int? furnitureId)
-        {
-            var tmp = Furnitures.FirstOrDefault(f => f.Id == furnitureId);
-            Furnitures.Remove(tmp);
-            return Task.CompletedTask;
-        }
-
-        public Task RemoveIngredientAsync(int ingredientId)
-        {
-            var tmp = Ingredients.FirstOrDefault(f => f.Id == ingredientId);
-            Ingredients.Remove(tmp);
-            return Task.CompletedTask;
-        }
-
-        public Task RemoveRecipeAsync(int recipeId)
-        {
-            var tmp = Recipes.FirstOrDefault(f => f.Id == recipeId);
-            Recipes.Remove(tmp);
-            return Task.CompletedTask;
-        }
-
-        public Task RemoveRecipeIngredientAsync(int recipeIngredientId)
-        {
-            var tmp = RecipeIngredients.FirstOrDefault(f => f.Id == recipeIngredientId);
-            RecipeIngredients.Remove(tmp);
-            return Task.CompletedTask;
-        }
-
-        public async Task<FurnitureDTO> UpdateFurnitureAsync(FurnitureDTO body)
-        {
-            var sel = Furnitures.FirstOrDefault(f => f.Id == body.Id);
-            Furnitures.Remove(sel);
-            Furnitures.Add(body);
-
-            if(sel.UnitPrice != body.UnitPrice)
-            {
-                await AddFurniturePriceAsync(new FurniturePriceInfoDTO()
-                {
-                    Date = DateTime.Now.Date,
-                    UnitPrice = body.UnitPrice,
-                    FurnitureId = body.Id
-                });
-            }
-            if(sel.StockQuantity !=  body.StockQuantity)
-            {
-                await AddFurnitureStockAsync(new FurnitureStockInfoDTO()
-                {
-                    Date = DateTime.Now.Date,
-                    StockQuantity = body.StockQuantity,
-                    FurnitureId = body.Id
-                });
-            }
-            return body;
-        }
-        public async Task<IngredientDTO> UpdateIngredientAsync(IngredientDTO body)
-        {
-            var sel = Ingredients.FirstOrDefault(f => f.Id == body.Id);
-            Ingredients.Remove(sel);
-            Ingredients.Add(body);
-
-            if (sel.UnitPrice != body.UnitPrice)
-            {
-                await AddIngredientPriceAsync(new IngredientPriceInfoDTO()
-                {
-                    Date = DateTime.Now.Date,
-                    UnitPrice = body.UnitPrice,
-                    IngredientId = body.Id
-                });
-            }
-            if (sel.StockQuantity != body.StockQuantity)
-            {
-                await AddIngredientStockAsync(new IngredientStockInfoDTO()
-                {
-                    Date = DateTime.Now.Date,
-                    StockQuantity = body.StockQuantity,
-                    IngredientId = body.Id
-                });
-            }
-            return body;
-        }
-        public Task<RecipeDTO> UpdateRecipeAsync(RecipeDTO body)
-        {
-            Recipes.Remove(Recipes.FirstOrDefault(f => f.Id == body.Id));
-            Recipes.Add(body);
-            return Task.FromResult(body);
-        }
-        public Task<RecipeIngredientDTO> UpdateRecipeIngredientAsync(RecipeIngredientDTO body)
-        {
-            RecipeIngredients.Remove(RecipeIngredients.FirstOrDefault(f => f.Id == body.Id));
-            RecipeIngredients.Add(body);
-            return Task.FromResult(body);
-        }
-
-        public Task<AuthenticateDTO> UpdatePasswordAsync(AuthenticateDTO body)
-        {
-            body.Password = string.Empty;
-            return Task.FromResult(body);
-        }
-
 
         private void PopulateIngredients()
         {
@@ -371,6 +83,18 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
                     IngredientId = 8,
                     Date = DateTime.Parse("16/01/2024"),
                     UnitPrice = 1.20d
+                },
+                new IngredientPriceInfoDTO()
+                {
+                    IngredientId = 9,
+                    Date = DateTime.Parse("16/01/2024"),
+                    UnitPrice = 1.04d
+                },
+                new IngredientPriceInfoDTO()
+                {
+                    IngredientId = 10,
+                    Date = DateTime.Parse("16/01/2024"),
+                    UnitPrice = 2.66d
                 }
             };
         }
@@ -556,24 +280,6 @@ namespace BusinessCostPriceAPI.Client.Services.Mock
 
         }
 
-        public Task<List<FurniturePriceInfoDTO>> GetFurniturePriceInfosByAsync(int furnitureId, Period period, int limit)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<List<FurnitureStockInfoDTO>> GetFurnitureStockInfosByAsync(int furnitureId, Period period, int limit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<IngredientPriceInfoDTO>> GetIngredientPriceInfosByAsync(int ingredientId, Period period, int limit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<IngredientStockInfoDTO>> GetIngredientStockInfosByAsync(int ingredientId, Period period, int limit)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
